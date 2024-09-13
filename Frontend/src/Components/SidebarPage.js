@@ -3,7 +3,7 @@ import { FaHome, FaHeart, FaFire, FaCalendarAlt, FaUsers, FaCog, FaSignOutAlt, F
 
 const SidebarPage = () => {
     return (
-        <div className="w-64 h-screen bg-gray-800 text-white flex flex-col">
+        <div className="w-64 sm:w-72 md:w-80 lg:w-96 xl:w-1/4 h-screen bg-gray-800 text-white flex flex-col">
             {/* Watch Icon Heading */}
             <div className="flex items-center p-4 bg-gray-900 border-b border-gray-700">
                 <FaRegClock className="text-yellow-400 text-2xl mr-3" />
