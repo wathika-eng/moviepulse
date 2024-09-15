@@ -1,6 +1,12 @@
 ## SETTING UP THE BACKEND
 
+**Ensure you have python 3, pip and virtualenv installed**
+
 1. Install the required packages by running the following command:
+
+```
+cd backend
+```
 
 ```
 virtualenv .venv
@@ -38,4 +44,22 @@ Then finally test the endpoints:
 
 ```
 curl http://127.0.0.1/api/test
+```
+
+## SETTING UP FRONTEND
+
+**Ensure you have node > 16 installed**
+
+1. Open a new terminal and cd to the frontend folder to install dependencies
+
+```
+cd frontend
+```
+
+```
+npm i
+```
+
+```
+npm run start
 ```
