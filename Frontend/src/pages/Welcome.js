@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import welcomeBackground from "../images/welcome-background.jpg";
-import LoginModal from '../components/LoginModal.js';
+import LoginModal from '../components/LoginModal';
 
 const WelcomeScreen = () => {
     const navigate = useNavigate();
