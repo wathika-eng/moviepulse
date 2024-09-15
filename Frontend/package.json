@@ -2,12 +2,18 @@
   "name": "moviepulse",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=16"
+  },
+  "engineStrict": true,
+  "proxy": "http://localhost:8000/api",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "ajv": "^6.12.6",
     "ajv-keywords": "^3.5.2",
+    "axios": "^1.7.7",
     "crypto-browserify": "^3.12.0",
     "dotenv": "^16.4.5",
     "os-browserify": "^0.3.0",
