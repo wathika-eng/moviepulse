@@ -1,5 +1,3 @@
-// src/components/LoginModal.js
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../Contexts/AppContext';
