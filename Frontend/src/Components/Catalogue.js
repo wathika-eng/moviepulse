@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios';
+import dotenv from 'dotenv';
 import Search from "./UI/Search";
 import Card from './UI/Card';
 import Loading from './Loading';
 import { useApp } from '../Contexts/AppContext';
 
-const apiKey = 'b5697d5817492dfccc3ebfa0514a306f';
+dotenv.config();
+const apiKey = process.env.apiKey;
 const baseUrl = 'https://api.themoviedb.org/3';
 
 function Catalogue(){
