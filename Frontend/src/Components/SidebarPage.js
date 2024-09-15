@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {
-	FaHome,
-	FaHeart,
-	FaFire,
-	FaCalendarAlt,
-	FaUsers,
-	FaCog,
-	FaSignOutAlt,
-	FaRegClock,
-} from 'react-icons/fa';
+import { FaHome, FaHeart, FaFire, FaCalendarAlt, FaUsers, FaCog, FaSignOutAlt, FaRegClock } from 'react-icons/fa';
+import { useApp } from '../Contexts/AppContext';
 
 const SidebarPage = () => {
-	const [movies, setMovies] = useState([]);
+    
+    return (
+        <div className=' md:flex h-screen dark:bg-gray-800 text-white flex-col border-r-2 border-gray-500 shadow-l'>
+            {/* Watch Icon Heading */}
+            <div className="flex items-center p-4 bg-gray-900 border-b border-gray-700">
+                <FaRegClock className="text-yellow-400 text-2xl mr-3" />
+                <span className="text-lg font-semibold">Watch List</span>
+            </div>
 
 	useEffect(() => {
 		axios

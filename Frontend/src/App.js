@@ -1,13 +1,20 @@
-import SidebarPage from './Components/SidebarPage';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import WelcomeScreen from './pages/Welcome';
+import Home from './pages/Home';
+import { AppProvider } from './Contexts/AppContext';
+
 function App() {
-	return (
-		<div className='App'>
-			<header>
-				<h1>MOVIE PULSE</h1>
-			</header>
-			<SidebarPage />
-		</div>
-	);
+  return (
+    <AppProvider>
+      <Router>
+        <Routes>
+          <Route path='/' element={<WelcomeScreen />} />
+          <Route path='/home' element={<Home />} />
+        </Routes>
+      </Router>
+    </AppProvider>
+  );
 }
 
 export default App;
