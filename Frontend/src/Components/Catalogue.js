@@ -38,10 +38,10 @@ function Catalogue(){
     return (
         <div className="h-full space-y-4 px-4">
             <div className="flex justify-start">
-                <div className="text-white flex flex-col pt-10 space-y-2  justify-end">
+                <div className="mt-8 text-white flex flex-col pt-10 space-y-2  justify-end">
                     <span className="text-5xl font-bold text-gray-200">Movie Pulse</span>
                     <span className="text-gray-300">
-                        <p>List of movies and TV Shows, I, Pramod Poudel have watched till date.</p>
+                        <p>List of movies and TV Shows, I have watched till date.</p>
                         <p>Explore what I have watched and also feel free to make a suggestion. 😉</p>
                     </span>
                 </div>

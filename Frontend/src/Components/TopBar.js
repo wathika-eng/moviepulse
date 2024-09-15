@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaUser } from "react-icons/fa6";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useApp } from "../Contexts/AppContext";
+import DropdownMenu from "./DropdownMenu";
 
 function TopBar() {
     const [ isOpen, setIsOpen ] = useState(false);
@@ -30,12 +31,8 @@ function TopBar() {
                     <IoMdArrowDropdown className="text-white" onClick={toggleDropDown} size={25}/>
                 </div>
             </div>
-            <div className={`${!isOpen ? 'hidden': 'flex flex-col bg-gray-700 text-white'}`}>
-                    <span>Home</span>
-                    <span>Favorites</span>
-                    <span>Trending</span>
-                    <span>Settings</span>
-                    <span>Logout</span>
+            <div className={`${!isOpen ? 'hidden': 'bg-gray-700 text-white'}`}>
+                <DropdownMenu />
             </div>
         </div>
     )
