@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import welcomeBackground from "../images/welcome-background.jpg";
-import LoginModal from '../components/LoginModal';
+// import LoginModal from '../components/LoginModal';
 
 const WelcomeScreen = () => {
     const [ isModalOpen, setIsModalOpen ] = useState(false);
@@ -32,7 +32,7 @@ const WelcomeScreen = () => {
                 Continue without log in
               </Link>
           </div>
-          { isModalOpen ? <LoginModal isOpen={isModalOpen} onClose={toggleLoginModal}  /> : null}
+          {/* { isModalOpen ? <LoginModal isOpen={isModalOpen} onClose={toggleLoginModal}  /> : null} */}
       </div>
     );
   };
