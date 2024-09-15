@@ -1,7 +1,7 @@
-import SidebarPage from "../components/SidebarPage";
-import TopBar from "../components/TopBar";
-import Catalogue from "../components/Catalogue";
-import { useApp } from "../Contexts/AppContext";
+import SidebarPage from "../components/SidebarPage.js";
+import TopBar from "../components/TopBar.js";
+import Catalogue from "../components/Catalogue.js";
+import { useApp } from "../Contexts/AppContext.js";
 
 function Home() {
     const { user } = useApp();
