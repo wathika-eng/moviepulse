@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../Contexts/AppContext';
 
-const LoginModal = ({ isOpen, onClose }) => {
+function LoginModal({ isOpen, onClose }) {
   const [formData, setFormData ] = useState({
     'username': '',
     'email': '',
