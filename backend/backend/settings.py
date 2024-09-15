@@ -21,8 +21,8 @@ DEBUG = env("DEBUG")
 SECRET_KEY = env("SECRET_KEY")
 
 ALLOWED_HOSTS = ["*"]
-
-
+TMDB_API_KEY = env("TMDB_API_KEY")
+TMDB_ACCESS_TOKEN = env("TMDB_ACCESS_TOKEN")
 # Application definition
 
 INSTALLED_APPS = [
@@ -32,19 +32,32 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    ############# MAIN APP ###################
+    "movieapp",
+    ############ THIRD PARTY APPS ############
     "rest_framework",
+    "corsheaders",
+    "rest_framework_simplejwt",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS: True
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 ROOT_URLCONF = "backend.urls"
 
 TEMPLATES = [
@@ -62,6 +75,13 @@ TEMPLATES = [
         },
     },
 ]
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "unique-snowflake",
+    }
+}
+
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
@@ -73,7 +93,7 @@ REST_FRAMEWORK = {
     )
 }
 
-
+AUTH_USER_MODEL = "movieapp.User"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -109,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Africa/Nairobi"
 
 USE_I18N = True
 
@@ -125,3 +145,24 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = env("EMAIL_HOST")
+# Port for sending email
+EMAIL_PORT = env.int("EMAIL_PORT")
+# Whether to send SMTP 'Date' header in the local time zone or in UTC
+EMAIL_USE_LOCALTIME = env.bool("EMAIL_USE_LOCALTIME", default=False)
+# Optional SMTP authentication information for EMAIL_HOST
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", default=None)
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default=None)
+# Whether to use TLS (True) or not (False)
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=False)
+# Whether to use SSL (True) or not (False)
+EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", default=False)
+# Path to the SSL certificate file for SSL
+EMAIL_SSL_CERTFILE = env("EMAIL_SSL_CERTFILE", default=None)
+# Timeout for the email connection in seconds
+EMAIL_TIMEOUT = env.int("EMAIL_TIMEOUT", default=10)
+# Default email address to use for 'from' field
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
