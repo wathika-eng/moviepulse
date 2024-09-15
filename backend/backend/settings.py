@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -50,7 +51,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -149,20 +149,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 EMAIL_HOST = env("EMAIL_HOST")
-# Port for sending email
+
 EMAIL_PORT = env.int("EMAIL_PORT")
-# Whether to send SMTP 'Date' header in the local time zone or in UTC
+
 EMAIL_USE_LOCALTIME = env.bool("EMAIL_USE_LOCALTIME", default=False)
-# Optional SMTP authentication information for EMAIL_HOST
+
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default=None)
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default=None)
-# Whether to use TLS (True) or not (False)
+
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=False)
-# Whether to use SSL (True) or not (False)
+
 EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", default=False)
-# Path to the SSL certificate file for SSL
+
 EMAIL_SSL_CERTFILE = env("EMAIL_SSL_CERTFILE", default=None)
-# Timeout for the email connection in seconds
+
 EMAIL_TIMEOUT = env.int("EMAIL_TIMEOUT", default=10)
-# Default email address to use for 'from' field
+
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
