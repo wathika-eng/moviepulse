@@ -5,42 +5,17 @@ import Search from "./UI/Search";
 import Card from './UI/Card';
 import Loading from './Loading';
 import { useApp } from '../Contexts/AppContext';
+import useMovie from '../Hooks/useMovie';
 
-const apiKey = process.env.REACT_APP_apiKey;
-const baseUrl = 'https://api.themoviedb.org/3';
 
 function Catalogue(){
-    const [movies, setMovies] = useState([])
-    const [isLoading, setIsLoading] = useState(false);
-
     const { setSearchQuery, searchQuery, user } = useApp();
+    const { movies, isLoading } = useMovie()
 
     const handleClick = (val) => {
         alert(val);
         setSearchQuery(val);
     }
-
-    useEffect(()=>{
-        setIsLoading(true);
-        async function searchMovies(searchQuery){
-            try {
-                const response = await axios.get(`${baseUrl}/search/movie`, {
-                    params: {
-                        api_key: apiKey,
-                        query: searchQuery,
-                    },
-                });
-                setMovies(response.data.results);
-                setIsLoading(false);
-
-            } catch (error){
-                setIsLoading(false);
-                console.log("Error", error.message);
-            }
-        }
-
-        searchMovies(searchQuery);
-    }, [searchQuery])
 
     return (
         <div className="h-full space-y-4 px-4">
