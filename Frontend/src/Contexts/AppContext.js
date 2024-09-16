@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext } from 'react';
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState('horror');
 

@@ -12,7 +12,7 @@ function Catalogue(){
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(false);
 
-    const { searchQuery } = useApp();
+    const { searchQuery, user } = useApp();
     useEffect(()=>{
         setIsLoading(true);
         async function searchMovies(searchQuery){
@@ -49,7 +49,7 @@ function Catalogue(){
             <Search />
             { 
                 isLoading ? ( <Loading />) : (
-                    <div className="md:grid grid-cols-5 gap-5">
+                    <div className={`md:grid ${user ? 'grid-cols-4' : 'grid-cols-5'}`}>
                         {movies.map(movie => <Card movie={movie} />)}
                     </div>
                 )
