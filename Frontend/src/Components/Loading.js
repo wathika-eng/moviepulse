@@ -23,7 +23,7 @@ const Card = () => {
 }
 function Loading() {
   return (
-    <div className='grid grid-cols-3 gap-0 mx-8'>
+    <div className='md:grid grid-cols-3 gap-0 mx-8'>
         {/* ONE */}
         <Card />
         <Card />

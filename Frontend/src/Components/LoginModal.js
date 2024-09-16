@@ -3,15 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../Contexts/AppContext';
 
 function LoginModal({ isOpen, onClose }) {
-  const [formData, setFormData ] = useState({
-    'username': '',
-    'email': '',
-    'password': ''
-  })
+  const [formData, setFormData ] = useState({})
   const [ isRegister, setIsRegister ] = useState(false);
 
   const navigate = useNavigate();
-  const { login } = useApp()
+  const { login, register } = useApp()
 
 
   const handleChange = (e) => {
@@ -20,10 +16,16 @@ function LoginModal({ isOpen, onClose }) {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Login submitted', formData);
-    login(formData)
-    navigate('/home')
-    onClose();
+    console.log('Form Data submitted', formData);
+
+   const response =  isRegister ? register({...formData, ...{last_name: 'Movie', password2: formData.password}}) : login(formData);
+
+   if (response === 'Success') {
+     navigate('/home');
+     onClose();
+   } else if (response === 'Error') {
+    alert('Wrong Email or Password')
+   }
   };
 
   const toggleIsRegister = () => {
@@ -36,16 +38,16 @@ function LoginModal({ isOpen, onClose }) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded-lg w-96 max-w-md">
-        <div className='flex justify-end text-purple-600 cursor-pointer' onClick={toggleIsRegister}>{isRegister? 'Login' : 'Register'}</div>
+        <div className='flex justify-end text-[#0d1f33] cursor-pointer' onClick={toggleIsRegister}>{isRegister? 'Login' : 'Register'}</div>
         <h2 className="text-2xl font-bold mb-6 text-center">{isRegister? 'Sign Up' : 'Sign In'}</h2>
         <form onSubmit={handleSubmit}>
         <div className="mb-4">
             <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-700">Username</label>
             <input
               type="text"
-              id="username"
-              name="username"
-              value={formData.username}
+              id="first_name"
+              name="first_name"
+              value={formData.first_name}
               onChange={(e) => handleChange(e)}
               className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
               required
@@ -74,7 +76,7 @@ function LoginModal({ isOpen, onClose }) {
               required
             />
           </div>
-          <button type="submit" className="w-full bg-purple-600 text-white p-2 rounded font-semibold hover:bg-purple-700 transition duration-300">
+          <button type="submit" className="w-full bg-[#0d1f33c4] text-white p-2 rounded font-semibold hover:bg-[#0d1f33] transition duration-300">
             {isRegister ? 'Submit': 'Login'}
           </button>
         </form>

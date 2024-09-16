@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Search from "./UI/Search";
 import Card from './UI/Card';
@@ -12,7 +13,13 @@ function Catalogue(){
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(false);
 
-    const { searchQuery, user } = useApp();
+    const { setSearchQuery, searchQuery, user } = useApp();
+
+    const handleClick = (val) => {
+        alert(val);
+        setSearchQuery(val);
+    }
+
     useEffect(()=>{
         setIsLoading(true);
         async function searchMovies(searchQuery){
@@ -37,16 +44,20 @@ function Catalogue(){
 
     return (
         <div className="h-full space-y-4 px-4">
-            <div className="flex justify-start">
-                <div className="mt-8 text-white flex flex-col pt-10 space-y-2  justify-end">
-                    <span className="text-5xl font-bold text-gray-200">Movie Pulse</span>
-                    <span className="text-gray-300">
-                        <p>List of movies and TV Shows, I have watched till date.</p>
-                        <p>Explore what I have watched and also feel free to make a suggestion. 😉</p>
-                    </span>
+            <div className="flex justify-start text-gray-300">
+                <div className="flex items-center space-x-6">
+                    <nav>
+                        <ul className="flex space-x-6">
+                            <li onClick={()=>handleClick('Movies')} className="hover:text-purple-400">Movies</li>
+                            <li onClick={(e)=>handleClick('Series')} className="hover:text-purple-400">Series</li>
+                            <li onClick={(e)=>handleClick('Documentaries')} className="hover:text-purple-400">Documentaries</li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <Search />
+
+            <div className='ml-6 mt-16 text-white font-bold text-3xl'>{searchQuery}</div>
             { 
                 isLoading ? ( <Loading />) : (
                     <div className={`md:grid ${user ? 'grid-cols-4' : 'grid-cols-5'}`}>
