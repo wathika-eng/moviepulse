@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Search from "./UI/Search";
 import Card from './UI/Card';

@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import { useApp } from "../../Contexts/AppContext";
 
 function Search(){
-    const { searchQuery, setSearchQuery } = useApp();
+    const { setSearchQuery } = useApp();
     const [ formData, setFormData ] = useState({
         'searchQuery': '',
     })

@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import WelcomeScreen from './pages/Welcome';
 import Home from './pages/Home';

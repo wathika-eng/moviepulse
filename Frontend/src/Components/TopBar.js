@@ -18,8 +18,8 @@ function TopBar() {
     }
 
     return (
-        <div className="fixed top-0 w-full  z-10">
-            <div className=" text-gray-300  flex justify-end md:px-10 px-2 space-x-4 py-1 bg-[#121829]">
+        <div className="fixed top-0 w-full  z-10 h-24">
+            <div className=" text-gray-300  flex  justify-end md:px-56 px-2 space-x-4 py-1 bg-[#121829]  h-16">
                 <div className="space-x-4">
                     <span className="text-xl cursor-pointer" onClick={() => handleLink('movies')}>Movies</span>
                     <span className="text-xl cursor-pointer" onClick={() => handleLink('tv shows')}>TV shows</span>

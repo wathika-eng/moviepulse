@@ -1,17 +1,17 @@
-import SidebarPage from "../components/SidebarPage.js";
-import TopBar from "../components/TopBar.js";
-import Catalogue from "../components/Catalogue.js";
-import { useApp } from "../Contexts/AppContext.js";
+import SidebarPage from "../Components/SidebarPage";
+import TopBar from "../Components/TopBar";
+import Catalogue from "../Components/Catalogue";
+import { useApp } from "../Contexts/AppContext";
 
 function Home() {
     const { user } = useApp();
 
     return (
-        <div className="md:flex flex-row bg-[#102942] ">
-            <div className={`${user ? 'hidden md:flex fixed basis basis-1/6' : 'hidden'}`}>
-                <SidebarPage />
-            </div>
-            <div className={`${user ? 'md:ml-40  basis-11/12' : 'w-full'}`}>
+        <div className="md:flex flex-row ">
+                <div className={`${user ? null : 'hidden'}`}>
+                    <SidebarPage />
+                </div>
+            <div className={`${user ? 'md:ml-44 basis-11/12' : 'w-full'} bg-[#102942]`}>
                 <TopBar  />
                 <Catalogue />
             </div>
