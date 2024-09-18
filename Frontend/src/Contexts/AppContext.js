@@ -9,32 +9,28 @@ export const AppProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState('Trending');
 
-  const login = (userData) => {
-
+  const login = async (userData) => {
+    try {
+      const response = axios.post(`${BASE_URL}/login/`, userData);
+      console.log(response.data);
       setUser(userData);
-      axios.post(`${BASE_URL}/login`, userData)
-      .then(response => {
-        console.log("Login Success", response.data)
-        setUser(response.data);
-        return 'success';
-      })
-      .catch((error) => {
-        console.log("An Error Occured while Loggin in", error);
-        return 'Error';
-      })
+      return 'success';
+    } catch(err) {
+      console.log('Error while loging in', err);
+      return 'error'
+    }
   };
 
-  const register = (userData) => {
-    console.log(userData)
-    axios.post(`${BASE_URL}/signin`, userData)
-    .then((response) => {
-      console.log("Registration Success", response.data)
+  const register = async (userData) => {
+    try {
+      const response = axios.post(`${BASE_URL}/register/`, userData);
+      console.log(response.data);
+      setUser(userData);
       return 'success';
-    })
-    .catch((error) => {
-      console.log("An Error Occured While Creating User", error)
-      return 'Error';
-    })
+    } catch (err) {
+      console.log("Error while signing up", err);
+      return 'error';
+    }
   }
 
   const logout = () => {

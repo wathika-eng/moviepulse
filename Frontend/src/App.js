@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import WelcomeScreen from './pages/Welcome';
-import Home from './pages/Home';
+import AccountDetails from './pages/AccountDetails';
 import { AppProvider } from './Contexts/AppContext';
+import Catalogue from './pages/Catalogue';
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<WelcomeScreen />} />
-          <Route path='/home' element={<Home />} />
+          <Route path='/home' element={<Catalogue />} />
+          <Route path='/account' element={<AccountDetails />} />
         </Routes>
       </Router>
     </AppProvider>

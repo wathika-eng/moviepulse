@@ -13,7 +13,6 @@ function Catalogue(){
     const { movies, isLoading } = useMovie()
 
     const handleClick = (val) => {
-        alert(val);
         setSearchQuery(val);
     }
 

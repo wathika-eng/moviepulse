@@ -14,13 +14,13 @@ function LoginModal({ isOpen, onClose }) {
     const { name, value } = e.target;
     setFormData({...formData, [name]:value})
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form Data submitted', formData);
+   const response =  isRegister ? await register({...formData, ...{last_name: 'Movie', password2: formData.password}}) : await login(formData);
 
-   const response =  isRegister ? register({...formData, ...{last_name: 'Movie', password2: formData.password}}) : login(formData);
-
-   if (response === 'Success') {
+   console.log("RESPONSE:::", response)
+   if (response === 'success') {
      navigate('/home');
      onClose();
    } else if (response === 'Error') {
@@ -41,7 +41,7 @@ function LoginModal({ isOpen, onClose }) {
         <div className='flex justify-end text-[#0d1f33] cursor-pointer' onClick={toggleIsRegister}>{isRegister? 'Login' : 'Register'}</div>
         <h2 className="text-2xl font-bold mb-6 text-center">{isRegister? 'Sign Up' : 'Sign In'}</h2>
         <form onSubmit={handleSubmit}>
-        <div className="mb-4">
+        <div className={`${isRegister ? "mb-4" : "hidden"}`}>
             <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-700">Username</label>
             <input
               type="text"
@@ -50,10 +50,9 @@ function LoginModal({ isOpen, onClose }) {
               value={formData.first_name}
               onChange={(e) => handleChange(e)}
               className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
-              required
             />
           </div>
-          <div className={`${isRegister ? "mb-4" : "hidden"}`}>
+          <div className='mb-4'>
             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
@@ -62,6 +61,7 @@ function LoginModal({ isOpen, onClose }) {
               value={formData.email}
               onChange={(e) => handleChange(e)}
               className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+              required
             />
           </div>
           <div className="mb-6">
