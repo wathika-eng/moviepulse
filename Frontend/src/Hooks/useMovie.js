@@ -1,63 +1,31 @@
- import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useApp } from '../Contexts/AppContext';
+import { useEffect, useState } from 'react';
 
-const tmdb_apiKey = process.env.REACT_APP_TMDB_apiKey;
-const gemini_apikey = process.env.REACT_APP_GEMINI_apikey;
-const baseUrl = 'https://api.themoviedb.org/3';
+const useMovie = (searchQuery, currentPage) => {
+	const [movies, setMovies] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [totalPages, setTotalPages] = useState(0);
 
+	useEffect(() => {
+		const fetchMovies = async () => {
+			setIsLoading(true);
+			try {
+				const response = await fetch(
+					`https://moviepulse.onrender.com/api/movies/?query=${searchQuery}&page=${currentPage}`
+				);
+				const data = await response.json();
+				setMovies(data.results);
+				setTotalPages(Math.ceil(data.count / 10)); // Adjust based on the items per page
+			} catch (error) {
+				console.error('Failed to fetch movies:', error);
+			} finally {
+				setIsLoading(false);
+			}
+		};
 
-const queryGeminiAI = async (userQuery) => {
-    try {
-      const response = await axios.post('https://api.gemini.ai/search', {
-      searchQuery: userQuery,
-      apiKey: gemini_apikey,
-    });
-    return response.data;
-    } catch (error) {
-      console.error('Error querying Gemini AI:', error);
-      return null;
-    }
-  };
+		fetchMovies();
+	}, [searchQuery, currentPage]);
 
+	return { movies, isLoading, totalPages };
+};
 
-
-  function useMovie () {
-    const [ movies, setMovies ] = useState([]);
-    const [ isLoading, setIsLoading ] = useState(false);
-    const { searchQuery } = useApp(); 
-
-
-    useEffect(() => {
-        async function  getMovie(){
-            try {
-                const geminiResults = await queryGeminiAI(searchQuery);
-                console.log("GEMINI SEARCH RESULTS::::", geminiResults);
-
-                const response = await axios.get(`${baseUrl}/search/movie`, {
-                    params: {
-                        api_key: tmdb_apiKey,
-                        query: searchQuery,
-                    },
-                });
-                setMovies(response.data.results);
-                setIsLoading(false);
-
-            } catch (error){
-                setIsLoading(false);
-                console.log("Error", error.message);
-            }
-        }
-
-        getMovie();
-    }, [searchQuery])
-
-
-    return {
-        isLoading,
-        movies,
-    }
-  }
-  
-
-  export default useMovie;
+export default useMovie;

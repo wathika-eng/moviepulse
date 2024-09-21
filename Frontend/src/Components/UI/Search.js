@@ -1,39 +1,29 @@
-import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import { useApp } from "../../Contexts/AppContext";
+import React, { useState } from 'react';
+import { useApp } from '../../Contexts/AppContext';
 
-function Search(){
-    const { setSearchQuery } = useApp();
-    const [ formData, setFormData ] = useState({
-        'searchQuery': '',
-    })
+const Search = () => {
+	const { setSearchQuery } = useApp();
+	const [input, setInput] = useState('');
 
+	const handleSearch = () => {
+		setSearchQuery(input);
+	};
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({...formData, [name]: value})
-    }
-
-    const handleSearch = () => {
-        setSearchQuery(formData.searchQuery)
-    }
-
-    return (
-        <div>
-            <form onSubmit={handleSearch}>
-                <div>
-                    <FaSearch size={24} className="relative top-8 left-[19rem] md:top-8 md:left-[22rem]" color="gray" />
-                    <input 
-                        name="searchQuery" 
-                        value={formData.searchQuery} 
-                        onChange={(e)=> {handleChange(e)}}  
-                        placeholder="search" 
-                        className="text-gray-200 text-xl w-full md:w-96 border-2 border-gray-600 outline-none bg-[#0d1f33] rounded  px-2 py-1 md:py-2" 
-                    />
-                </div>
-            </form>
-        </div>
-    )
-}
+	return (
+		<div className='mb-8'>
+			<input
+				type='text'
+				value={input}
+				onChange={(e) => setInput(e.target.value)}
+				className='p-2 rounded-lg'
+			/>
+			<button
+				onClick={handleSearch}
+				className='ml-2 p-2 bg-gray-700 text-white rounded-lg'>
+				Search
+			</button>
+		</div>
+	);
+};
 
 export default Search;

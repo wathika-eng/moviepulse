@@ -1,18 +1,24 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Card({ movie }) {
-    return (
-        <div className='border-black rounded-2xl shadow-lg w-60 m-10  pb-4'>
-            {/* <h1>{movie.original_title}</h1> */}
-            <div className=' shadow-black   overflow-hidden rounded-t-lg flex justify-center'>
-                {movie.poster_path ? <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt='cover' /> : <img src={'/static/images/no-image.png'} alt='no-image' />
-                }
-            </div>
-            <div className='mt-4 px-4'>
-                <h1 className='text-xl dark:text-gray-300 font-semibold'>{movie.original_title}</h1>
-                <p className='line-clamp-3 dark:text-gray-400'>{movie.overview}</p>
-            </div>
-        </div>
-    );
-}
+const BASE_URL = 'https://image.tmdb.org/t/p/w500'; // Base URL for image service
+
+const Card = ({ movie }) => {
+	return (
+		<div className='bg-gray-800 rounded-lg overflow-hidden shadow-lg transition transform hover:scale-105 duration-300'>
+			<Link to={`/movie/${movie.id}`}>
+				<img
+					src={`${BASE_URL}${movie.poster_path}`} // Construct full image URL
+					alt={movie.title}
+					className='w-full h-72 object-cover'
+				/>
+				<div className='p-4'>
+					<h3 className='text-white text-lg font-semibold'>{movie.title}</h3>
+					<p className='text-gray-400 text-sm'>{movie.release_date}</p>
+				</div>
+			</Link>
+		</div>
+	);
+};
 
 export default Card;

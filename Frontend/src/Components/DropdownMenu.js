@@ -15,10 +15,6 @@ function DropdownMenu({ username }){
     setIsOpen(false);
   };
 
-  const handleHome = () => {
-    navigate('/home')
-    setIsOpen(false);
-  }
   const handleToggleTheme = () => {
     toggleTheme();
     setIsOpen(false);
@@ -41,12 +37,6 @@ function DropdownMenu({ username }){
       </button>
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 border border-gray-700 z-50">
-        <button
-            className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white w-full text-left"
-            onClick={handleHome}
-          >
-            Home
-          </button>
           <button
             className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white w-full text-left"
             onClick={handleMyAccount}
