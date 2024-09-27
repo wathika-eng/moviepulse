@@ -16,11 +16,10 @@ function LoginModal({ isOpen, onClose }) {
 	const navigate = useNavigate();
 	const { login, register } = useApp();
 
-	// useEffect to redirect if already logged in
 	useEffect(() => {
 		const accessToken = localStorage.getItem('accessToken');
 		if (accessToken) {
-			navigate('/home'); // Redirect to home if token exists
+			navigate('/home');
 		}
 	}, [navigate]);
 
@@ -32,29 +31,39 @@ function LoginModal({ isOpen, onClose }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if (isRegister) {
-			if (formData.password !== formData.password2) {
-				toast.error('Passwords do not match!');
-				return;
+		try {
+			let success;
+			if (isRegister) {
+				if (formData.password !== formData.password2) {
+					toast.error('Passwords do not match!');
+					return;
+				}
+
+				success = await register({
+					email: formData.email,
+					first_name: formData.first_name,
+					last_name: formData.last_name,
+					password: formData.password,
+					password2: formData.password2,
+				});
+			} else {
+				success = await login({
+					email: formData.email,
+					password: formData.password,
+				});
 			}
 
-			const response = register({
-				email: formData.email,
-				first_name: formData.first_name,
-				last_name: formData.last_name,
-				password: formData.password,
-				password2: formData.password2,
-			});
-			if (response === 'success') navigate('/home')
-			console.log("REGISTER RESPONSE::", response)
-		} else {
-			const response =  await login({
-				email: formData.email,
-				password: formData.password,
-			});
-
-			if (response === 'success') navigate('/home')
-			console.log("LOGIN RESPONSE::", response)
+			if (success) {
+				toast.success(
+					isRegister ? 'Registration successful' : 'Login successful'
+				);
+				navigate('/home');
+				onClose();
+			} else {
+				toast.error('Authentication failed. Please try again.');
+			}
+		} catch (error) {
+			toast.error('An error occurred. Please try again.');
 		}
 	};
 

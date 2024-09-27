@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useApp } from '../../Contexts/AppContext';
+import { useApp } from '../Contexts/AppContext';
 
 const Search = () => {
 	const { setSearchQuery } = useApp();

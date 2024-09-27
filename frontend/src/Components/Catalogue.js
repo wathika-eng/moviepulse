@@ -78,7 +78,7 @@ function Catalogue() {
 						)}
 					</div>
 
-					{/* Pagination controls */}
+					
 					<div className='flex justify-center mt-8'>
 						<button
 							onClick={() => handlePageChange(currentPage - 1)}
